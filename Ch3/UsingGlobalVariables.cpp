@@ -25,7 +25,7 @@ void multiplyNumbers() {
    return;
 }
 
-int main(int argc, char const *argv[])
+int main()
 {
    std::cout << "This program will help you multiply two numbers." << std::endl;
 
