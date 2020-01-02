@@ -24,3 +24,9 @@ cppFlags := -Wall -pedantic-errors -Weffc++ -Wextra -Wsign-conversion -Werror
 
 # test: test.cpp test.h test2.h
 #	g++ -o $@ $(gdbFlag) $(cppFlags) $<
+
+Ch1/hello: Ch1/Hello.cpp
+	g++ -o $@ $(gdbFlag) $(cppFlags) $<
+
+Ch3/usingGlobalVariables: Ch3/UsingGlobalVariables.cpp
+	g++ -o $@ $(gdbFlag) $(cppFlags) $<
