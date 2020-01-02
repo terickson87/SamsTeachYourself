@@ -24,9 +24,13 @@ cppFlags := -Wall -pedantic-errors -Weffc++ -Wextra -Wsign-conversion -Werror
 
 # test: test.cpp test.h test2.h
 #	g++ -o $@ $(gdbFlag) $(cppFlags) $<
+# this is effectively the same as:
+# g++ -o test -ggdb -Wall -pedantic-errors -Weffc++ -Wextra -Wsign-conversion -Werror test.cpp
 
 Ch1/hello: Ch1/Hello.cpp
 	g++ -o $@ $(gdbFlag) $(cppFlags) $<
+# g++ -o Ch1/hello -ggdb -Wall -pedantic-errors -Weffc++ -Wextra -Wsign-conversion -Werror Ch1/Hello.cpp
 
 Ch3/usingGlobalVariables: Ch3/UsingGlobalVariables.cpp
 	g++ -o $@ $(gdbFlag) $(cppFlags) $<
+# g++ -o Ch3/usingGlobalVariables -ggdb -Wall -pedantic-errors -Weffc++ -Wextra -Wsign-conversion -Werror Ch3/UsingGlobalVariables.cpp
