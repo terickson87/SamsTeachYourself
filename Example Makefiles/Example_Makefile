@@ -1,0 +1,95 @@
+#
+# Author: Todd Erickson (twericks@usc.edu)
+#
+# Find what to put for the recipe by running the command:
+# gcc -MM filename.c
+# $@ == target name, ie "<target>: prerequisites \n \t recipe"
+# $< == first prerequisite name
+
+# generic variables
+cFlags := -g -Wall
+commonW2OBJs := w2input.o w2output.o w2packet.o w2queue.o w2server.o w2stat.o w2threads.o w2util.o w2shutdown.o
+commonMyOBJs := my402list.o mysleep.o mytimecovr.o mytimespec.o mytimeval.o
+commonHs := cs402.h w2DTs.h
+
+# executable rules
+warmup2: warmup2.o $(commonHs) $(commonMyOBJs) $(commonW2OBJs)
+	gcc -o $@ $(cFlags) warmup2.o $(commonMyOBJs) $(commonW2OBJs) -lpthread -lm
+
+myGenerateMakefileDependencies: myGenerateMakefileDependencies.o
+	gcc -o $@ $(cFlags) myGenerateMakefileDependencies.o
+
+# warmup2 rules
+w2input.o: w2input.c w2input.h cs402.h w2DTs.h my402list.h w2server.h \
+ mytimeval.h
+	gcc -o $@ -c $(cFlags) $<
+
+w2output.o: w2output.c w2output.h cs402.h mytimeval.h w2DTs.h my402list.h \
+ w2server.h
+	gcc -o $@ -c $(cFlags) $<
+
+w2packet.o: w2packet.c w2packet.h cs402.h w2DTs.h my402list.h w2server.h \
+ mytimeval.h w2stat.h w2output.h
+	gcc -o $@ -c $(cFlags) $<
+
+w2queue.o: w2queue.c w2queue.h cs402.h w2DTs.h my402list.h w2server.h \
+ mytimeval.h w2output.h w2packet.h w2stat.h
+	gcc -o $@ -c $(cFlags) $<
+
+w2server.o: w2server.c w2server.h cs402.h my402list.h mytimeval.h \
+ mysleep.h w2DTs.h w2packet.h w2queue.h w2stat.h w2input.h w2output.h \
+ w2shutdown.h w2threads.h
+	gcc -o $@ -c $(cFlags) $<
+
+w2shutdown.o: w2shutdown.c w2shutdown.h w2DTs.h my402list.h cs402.h \
+ w2server.h
+	gcc -o $@ -c $(cFlags) $<
+
+w2stat.o: w2stat.c w2stat.h w2DTs.h my402list.h cs402.h w2server.h \
+ mytimeval.h w2packet.h
+	gcc -o $@ -c $(cFlags) $<
+
+w2threads.o: w2threads.c w2DTs.h my402list.h cs402.h w2server.h
+	gcc -o $@ -c $(cFlags) $<
+
+w2util.o: w2util.c w2util.h cs402.h my402list.h w2DTs.h w2server.h \
+ mytimeval.h w2threads.h w2queue.h w2packet.h
+	gcc -o $@ -c $(cFlags) $<
+
+warmup2.o: warmup2.c cs402.h my402list.h mytimeval.h w2DTs.h w2server.h \
+ w2input.h w2util.h w2packet.h w2stat.h w2threads.h w2queue.h w2output.h
+	gcc -o $@ -c $(cFlags) $<
+
+# generic rules
+# my402list.o myCLL.o myGenerateMakefileDependencies.o mysleep.o mytester.o mytimecovr.o mytimespec.o mytimeval.o
+my402list.o: my402list.c cs402.h my402list.h
+	gcc -o $@ -c $(cFlags) $<
+
+myCLL.o: myCLL.c myCLL.h
+	gcc -o $@ -c $(cFlags) $<
+
+myGenerateMakefileDependencies.o: myGenerateMakefileDependencies.c
+	gcc -o $@ -c $(cFlags) $<
+
+mysleep.o: mysleep.c mysleep.h mytimeval.h mytimecovr.h
+	gcc -o $@ -c $(cFlags) $<
+
+mytester.o: mytester.c mytester.h
+	gcc -o $@ -c $(cFlags) $<
+
+mytimecovr.o: mytimecovr.c mytimecovr.h mytimespec.h mytimeval.h
+	gcc -o $@ -c $(cFlags) $<
+
+mytimespec.o: mytimespec.c mytimespec.h
+	gcc -o $@ -c $(cFlags) $<
+
+mytimeval.o: mytimeval.c mytimeval.h
+	gcc -o $@ -c $(cFlags) $<
+
+# submission
+warmup2-submit:
+	tar cvzf warmup2.tar.gz Makefile *.c *.h* w2-README.txt
+
+# clean
+clean:
+	rm -f *.o warmup2 w2tester myGenerateMakefileDependencies

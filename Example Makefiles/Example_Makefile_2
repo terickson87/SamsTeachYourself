@@ -1,0 +1,58 @@
+# build all rule
+.PHONY: all
+all: serverAoutput serverBoutput awsoutput monitoroutput client
+
+# build rules
+serverAoutput: serverA.cpp socket_constants.h custom_sockets.h
+	g++ -o $@ $^
+
+serverBoutput: serverB.cpp socket_constants.h custom_sockets.h
+	g++ -o $@ $^
+
+awsoutput: aws.cpp socket_constants.h custom_sockets.h
+	g++ -o $@ $^
+
+monitoroutput: monitor.cpp socket_constants.h custom_sockets.h
+	g++ -o $@ $^
+
+client: client.cpp socket_constants.h custom_sockets.h
+	g++ -o $@ $^
+
+# Pseudo-PHONY run rules
+serverA: serverAoutput
+	./serverAoutput
+
+serverB: serverBoutput
+	./serverBoutput
+
+aws: awsoutput
+	./awsoutput
+
+monitor: monitoroutput
+	./monitoroutput
+
+# clean rule
+.PHONY: clean
+clean:
+	rm -f serverAoutput serverBoutput awsoutput monitoroutput client
+
+# PHONY -ggdb -Wall build rules
+.PHONY: serverADB
+serverADB: serverA.cpp socket_constants.h custom_sockets.h
+	g++ -ggdb -Wall -o serverAoutput $^
+
+.PHONY: serverBDB
+serverBDB: serverB.cpp socket_constants.h custom_sockets.h
+	g++ -ggdb -Wall -o serverBoutput $^
+
+.PHONY: awsDB
+awsDB: aws.cpp socket_constants.h custom_sockets.h
+	g++ -ggdb -Wall -o awsoutput $^
+
+.PHONY: monitorDB
+monitorDB: monitor.cpp socket_constants.h custom_sockets.h
+	g++ -ggdb -Wall -o monitoroutput $^
+
+.PHONY: clientDB
+clientDB: client.cpp socket_constants.h custom_sockets.h
+	g++ -ggdb -Wall -o client $^
