@@ -13,7 +13,7 @@
 
 cFlags := -Wall
 gdbFlag := -ggdb
-cppFlags := -Wall -pedantic-errors -Weffc++ -Wextra -Wsign-conversion -Werror
+cppFlags := -Wall -pedantic-errors -Weffc++ -Wextra -Wsign-conversion -Werror -std=c++17
 # "-pedantic-errors",// Treat as errors the warnings demmanded by strict ISO C and ISO C++
 # "-Wall",// All Compiler warnings
 # "-Weffc++",// Effective C++ warnings
@@ -22,6 +22,7 @@ cppFlags := -Wall -pedantic-errors -Weffc++ -Wextra -Wsign-conversion -Werror
 # "-Werror",// Treat warnings as errors
 # For GCC/G++, you can pass compiler flags -std=c++11, -std=c++14, -std=c++17, or -std=c++2a to enable C++11/14/17/2a support respectively.
 
+# EXAMPLE
 # test: test.cpp test.h test2.h
 #	g++ -o $@ $(gdbFlag) $(cppFlags) $<
 # this is effectively the same as:
