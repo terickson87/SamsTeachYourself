@@ -14,9 +14,22 @@
             "-Wextra",// Extra Compiler warnings
             "-Wsign-conversion",// Warn for implicit conversions that may change the sign of an integer value
             "-Werror",// Treat warnings as errors
+            "-std=c++14",// C++14 enabled
             "-o",
-            "${fileBasenameNoExtension}",
-            "${file}"
+            "${relativeFileDirname}/${fileBasenameNoExtension}",
+            "${relativeFile}"
+         ],
+         "group": {
+            "kind": "build",
+            "isDefault": true
+         }
+      },
+      {
+         "label": "make active file",
+         "type": "shell",
+         "command": "make",
+         "args": [
+            "${relativeFile}"
          ],
          "group": {
             "kind": "build",

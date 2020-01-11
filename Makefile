@@ -1,6 +1,10 @@
+# https://linux.die.net/man/1/g++
 
 # Find what to put for the recipe by running the command:
-# gcc -MM filename.c
+# g++ -MM filename.c
+
+# To generate object files (no linker) run something like (using -c flag):
+# g++ -o filename.o -c 
 
 # Automatic variables
 # https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html
@@ -13,7 +17,7 @@
 
 cFlags := -Wall
 gdbFlag := -ggdb
-cppFlags := -Wall -pedantic-errors -Weffc++ -Wextra -Wsign-conversion -Werror -std=c++17
+cppFlags := -Wall -pedantic-errors -Weffc++ -Wextra -Wsign-conversion -Werror -std=c++14
 # "-pedantic-errors",// Treat as errors the warnings demmanded by strict ISO C and ISO C++
 # "-Wall",// All Compiler warnings
 # "-Weffc++",// Effective C++ warnings
