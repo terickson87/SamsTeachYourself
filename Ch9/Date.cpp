@@ -20,8 +20,8 @@ std::map<int,int> Date::m_DaysInMonth = {   {1,31},
 
 // Date constructor
 Date::Date(const int year, const int month, const int day) : m_year(year), m_month(month), m_day(day) {
-    assert(Date::m_DaysInMonth.at(m_month) >= m_day);
-    assert(Date::MONTHS_IN_YEAR >= m_month);
+    assert(this->isDayGood());
+    assert(this->isMonthGood());
 }
 
 bool Date::isDayGood() {
@@ -69,18 +69,27 @@ Date operator+ (const Date& date1, const Date& date2) {
     int month = date1.getMonth() + date2.getMonth();
     int year = date1.getYear() + date2.getYear();
 
-    bool dayIsGoodFlag = Date::isDayGood(day, month);
     bool monthIsGoodFlag = Date::isMonthGood(month);
+    while (!monthIsGoodFlag) {
+        int excessMonths = month - Date::MONTHS_IN_YEAR;
+        ++year;
+        month = excessMonths;
+        monthIsGoodFlag = Date::isMonthGood(month);
+    }
+    bool dayIsGoodFlag = Date::isDayGood(day, month);
+    
     while (!dayIsGoodFlag || !monthIsGoodFlag) {
         while (!monthIsGoodFlag) {
             int excessMonths = month - Date::MONTHS_IN_YEAR;
             ++year;
             month = excessMonths;
+            monthIsGoodFlag = Date::isMonthGood(month);
         }
         while (!dayIsGoodFlag) {
             int excessDays = day - Date::m_DaysInMonth.at(month);
             ++month;
             day = excessDays;
+            dayIsGoodFlag = Date::isDayGood(day, month);
         }
         dayIsGoodFlag = Date::isDayGood(day, month);
         monthIsGoodFlag = Date::isMonthGood(month);
