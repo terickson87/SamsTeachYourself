@@ -29,7 +29,7 @@
          "type": "shell",
          "command": "make",
          "args": [
-            "${relativeFile}"
+            "${relativeFileDirname}/${fileBasenameNoExtension}"
          ],
          "group": {
             "kind": "build",
