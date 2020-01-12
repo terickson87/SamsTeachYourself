@@ -42,3 +42,10 @@ Ch3/usingGlobalVariables: Ch3/UsingGlobalVariables.cpp
 
 Ch9/Date.o: Ch9/Date.cpp Ch9/Date.h
 	g++ -c -o $@ $(gdbFlag) $(cppFlags) $<
+
+Ch9/testDate.o: Ch9/testDate.cpp Ch9/Date.o Ch9/Date.h
+	g++ -c -o $@ $(gdbFlag) $(cppFlags) $<
+
+# .PHONY: Ch9/testDate Ch9/testDate.o Ch9/Date.o
+Ch9/testDate: Ch9/testDate.o Ch9/Date.o
+	g++ -o $@ $(gdbFlag) $(cppFlags) $^
