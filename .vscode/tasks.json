@@ -16,8 +16,8 @@
             "-Werror",// Treat warnings as errors
             "-std=c++14",// C++14 enabled
             "-o",
-            "${relativeFileDirname}/${fileBasenameNoExtension}",
-            "${relativeFile}"
+            "${fileDirname}/${fileBasenameNoExtension}",
+            "${file}"
          ],
          "group": {
             "kind": "build",
@@ -29,7 +29,7 @@
          "type": "shell",
          "command": "make",
          "args": [
-            "${relativeFileDirname}/${fileBasenameNoExtension}"
+            "${fileDirname}/${fileBasenameNoExtension}"
          ],
          "group": {
             "kind": "build",
