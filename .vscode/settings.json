@@ -40,6 +40,16 @@
       "stdexcept": "cpp",
       "streambuf": "cpp",
       "utility": "cpp",
-      "typeinfo": "cpp"
+      "typeinfo": "cpp",
+      "atomic": "cpp",
+      "cstddef": "cpp",
+      "optional": "cpp",
+      "string_view": "cpp",
+      "iterator": "cpp",
+      "map": "cpp",
+      "memory_resource": "cpp",
+      "random": "cpp",
+      "string": "cpp",
+      "bit": "cpp"
    }
 }
