@@ -39,3 +39,6 @@ Ch1/hello: Ch1/Hello.cpp
 Ch3/usingGlobalVariables: Ch3/UsingGlobalVariables.cpp
 	g++ -o $@ $(gdbFlag) $(cppFlags) $<
 # g++ -o Ch3/usingGlobalVariables -ggdb -Wall -pedantic-errors -Weffc++ -Wextra -Wsign-conversion -Werror Ch3/UsingGlobalVariables.cpp
+
+Ch9/Date.o: Ch9/Date.cpp Ch9/Date.h
+	g++ -c -o $@ $(gdbFlag) $(cppFlags) $<
